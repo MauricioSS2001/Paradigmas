@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1663798625 source:d:\faculdade\6 semestre\paradigmas\exercicio\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
