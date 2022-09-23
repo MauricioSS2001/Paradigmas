@@ -11,6 +11,16 @@ typedef struct {
 
 } estudante;
 
+void imprimir_estudantes(estudante *pont, int qtd_estudantes){
+    printf("\n====== Estudantes registrados ======");
+    for(int z=0;z<qtd_estudantes;z++){
+        printf("\nNome: %s\n", pont[z].nome);
+        printf("Idade: %d\n", pont[z].idade);
+        printf("Nota: %.2f\n", pont[z].nota);
+        printf("Nivel: %s\n\n", pont[z].nivel);
+    };
+}
+
 int main()
 {
     int qtd_estudantes;
@@ -34,15 +44,10 @@ int main()
         if(x == qtd_estudantes){
             break;
         }
-    };
+    }
 
-    printf("\n====== Estudantes registrados ======");
-    for(int z=0;z<qtd_estudantes;z++){
-        printf("\nNome: %s\n", pont[z].nome);
-        printf("Idade: %d\n", pont[z].idade);
-        printf("Nota: %.2f\n", pont[z].nota);
-        printf("Nivel: %s\n\n", pont[z].nivel);
-    };
+    imprimir_estudantes(pont, qtd_estudantes);
+
 
     return 0;
 }
