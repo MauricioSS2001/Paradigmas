@@ -67,6 +67,51 @@ float media_calouros(estudante *pont, int qtd_estudantes){
     return total_calouros;
 }
 
+float media_veteranos(estudante *pont, int qtd_estudantes){
+    float total_veteranos = 0;
+    float veterano = 0;
+    for(int z=0;z<qtd_estudantes;z++){
+        if(strcmp(pont[z].nivel,"veterano") == 0){
+          total_veteranos = total_veteranos + pont[z].nota;
+          veterano = veterano + 1;
+        }
+    };
+    total_veteranos = total_veteranos/veterano;
+    return total_veteranos;
+}
+
+void media_seis(estudante *pont, int qtd_estudantes){
+    printf("\n====== Estudantes com nota superior a seis ======");
+    for(int z=0;z<qtd_estudantes;z++){
+        if(pont[z].nota >= 6.0){
+            printf("\nNome: %s\n", pont[z].nome);
+            printf("Nota: %.2f\n", pont[z].nota);
+        }
+    };
+}
+
+void media_seis_calouros(estudante *pont, int qtd_estudantes){
+    printf("=== Calouros com media superior a seis ===");
+    for(int z=0;z<qtd_estudantes;z++){
+        if(pont[z].nota >= 6.0 && strcmp(pont[z].nivel,"calouro") == 0){
+            printf("\nNome: %s\n", pont[z].nome);
+            printf("Nota: %.2f\n", pont[z].nota);
+            printf("Nivel: %s\n\n", pont[z].nivel);
+        }
+    }
+}
+
+void media_seis_veteranos(estudante *pont, int qtd_estudantes){
+    printf("=== Veteranos com media superior a seis ===");
+    for(int z=0;z<qtd_estudantes;z++){
+        if(pont[z].nota >= 6.0 && strcmp(pont[z].nivel,"veterano") == 0){
+            printf("\nNome: %s\n", pont[z].nome);
+            printf("Nota: %.2f\n", pont[z].nota);
+            printf("Nivel: %s\n\n", pont[z].nivel);
+        }
+    }
+}
+
 int main()
 {
     int qtd_estudantes;
@@ -99,6 +144,10 @@ int main()
     printf("\n3. Imprimir veteranos");
     printf("\n4. Calcular media de todos alunos");
     printf("\n5. Calcular media de alunos calouros");
+    printf("\n6. Calcular media de alunos veteranos");
+    printf("\n7. Alunos com media superior a seis");
+    printf("\n8. Alunos calouros com media superior a seis");
+    printf("\n9. Alunos veteranos com media superior a seis");
     printf("\nOpcao: ");
     scanf("%d", &op_menu);
 
@@ -116,7 +165,19 @@ int main()
             printf("\nMedia de todos alunos: %.2f", media_estudantes(pont, qtd_estudantes));
             break;
         case 5:
-            printf("\nMedia de alunos calouros: %.2f", media_calouros(pont, qtd_estudantes));
+            printf("\nMedia de notas dos alunos calouros: %.2f", media_calouros(pont, qtd_estudantes));
+            break;
+        case 6:
+            printf("\nMedia de notas dos alunos veteranos: %.2f", media_veteranos(pont, qtd_estudantes));
+            break;
+        case 7:
+            media_seis(pont, qtd_estudantes);
+            break;
+        case 8:
+            media_seis_calouros(pont, qtd_estudantes);
+            break;
+        case 9:
+            media_seis_veteranos(pont, qtd_estudantes);
             break;
 
     };
