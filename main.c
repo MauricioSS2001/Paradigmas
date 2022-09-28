@@ -21,7 +21,7 @@ void imprimir_estudantes(estudante *pont, int qtd_estudantes){
     };
 }
 
-void alunos_calouros(estudante *pont, int qtd_estudantes){
+void estudantes_calouros(estudante *pont, int qtd_estudantes){
     printf("\n====== Estudantes Calouros registrados ======");
     for(int z=0;z<qtd_estudantes;z++){
         if(strcmp(pont[z].nivel,"calouro") == 0){
@@ -33,7 +33,7 @@ void alunos_calouros(estudante *pont, int qtd_estudantes){
     };
 }
 
-void alunos_veteranos(estudante *pont, int qtd_estudantes){
+void estudantes_veteranos(estudante *pont, int qtd_estudantes){
     printf("\n====== Estudantes Veteranos registrados ======");
     for(int z=0;z<qtd_estudantes;z++){
         if(strcmp(pont[z].nivel,"veterano") == 0){
@@ -102,7 +102,7 @@ void media_seis_calouros(estudante *pont, int qtd_estudantes){
 }
 
 void media_seis_veteranos(estudante *pont, int qtd_estudantes){
-    printf("=== Veteranos com media superior a seis ===");
+    printf("\n=== Veteranos com media superior a seis ===");
     for(int z=0;z<qtd_estudantes;z++){
         if(pont[z].nota >= 6.0 && strcmp(pont[z].nivel,"veterano") == 0){
             printf("\nNome: %s\n", pont[z].nome);
@@ -110,6 +110,31 @@ void media_seis_veteranos(estudante *pont, int qtd_estudantes){
             printf("Nivel: %s\n\n", pont[z].nivel);
         }
     }
+}
+
+void registra_estudantes(estudante *pont, int qtd_estudantes){
+    for(int x=0; x<qtd_estudantes; x++){
+        printf("Digite o nome do estudante: ");
+        scanf("%s", &pont[x].nome);
+        printf("Digite a idade do estudante: ");
+        scanf("%d", &pont[x].idade);
+        printf("Digite a nota do aluno de maneira decimal: ");
+        scanf("%f", &pont[x].nota);
+        while(pont[x].nota < 0 || pont[x].nota > 10){
+            printf("\nNota invalida, digite novamente: ");
+            scanf("%d", &pont[x].nota);
+        };
+        printf("Digite o nivel do aluno: ");
+        scanf("%s", &pont[x].nivel);
+        printf("\n");
+        while(strcmp(pont[x].nivel,"calouro") != 0 && strcmp(pont[x].nivel,"veterano") != 0){
+            printf("\nNivel invalido, utilize calouro ou veterano: ");
+            scanf("%s", &pont[x].nivel);
+        };
+        if(x == qtd_estudantes){
+            break;
+        };
+    };
 }
 
 int main()
@@ -122,22 +147,9 @@ int main()
     printf("Digite quantos estudantes deseja registrar: ");
     scanf("%d", &qtd_estudantes);
     pont = malloc(qtd_estudantes*sizeof(est)); // Alocação dinâmica de memória.
+    registra_estudantes(pont, qtd_estudantes);
 
-    for(int x=0; x<qtd_estudantes; x++){
-        printf("Digite o nome do estudante: ");
-        scanf("%s", &pont[x].nome);
-        printf("Digite a idade do estudante: ");
-        scanf("%d", &pont[x].idade);
-        printf("Digite a nota do aluno de maneira decimal: ");
-        scanf("%f", &pont[x].nota);
-        printf("Digite o nivel do aluno: ");
-        scanf("%s", &pont[x].nivel);
-        printf("\n");
-        if(x == qtd_estudantes){
-            break;
-        }
-    }
-
+    while(op_menu !=10){
     printf("\n\n=== Menu ===");
     printf("\n1. Imprimir todos alunos");
     printf("\n2. Imprimir calouros");
@@ -148,18 +160,23 @@ int main()
     printf("\n7. Alunos com media superior a seis");
     printf("\n8. Alunos calouros com media superior a seis");
     printf("\n9. Alunos veteranos com media superior a seis");
+    printf("\n10. Encerrar programa");
     printf("\nOpcao: ");
     scanf("%d", &op_menu);
+    while(op_menu < 1 || op_menu > 10){
+        printf("\n Opcao invalida! Digite a opcao novamente: ");
+        scanf("%d", &op_menu);
+    };
 
     switch(op_menu){
         case 1:
             imprimir_estudantes(pont, qtd_estudantes);
             break;
         case 2:
-            alunos_calouros(pont, qtd_estudantes);
+            estudantes_calouros(pont, qtd_estudantes);
             break;
         case 3:
-            alunos_veteranos(pont, qtd_estudantes);
+            estudantes_veteranos(pont, qtd_estudantes);
             break;
         case 4:
             printf("\nMedia de todos alunos: %.2f", media_estudantes(pont, qtd_estudantes));
@@ -182,5 +199,6 @@ int main()
 
     };
 
+    }
     return 0;
 }
